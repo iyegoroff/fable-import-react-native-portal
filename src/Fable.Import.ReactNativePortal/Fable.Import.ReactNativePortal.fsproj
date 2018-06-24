@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>Fable.React binding for Flatpickr component</Description>
-    <PackageProjectUrl>https://github.com/Zaid-Ajaj/elmish-components</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Zaid-Ajaj/elmish-components</RepositoryUrl>
-    <PackageLicenseUrl>https://github.com/Zaid-Ajaj/Fable.React.Flatpickr/blob/master/LICENSE</PackageLicenseUrl>
+    <Description>Fable binding for react-native-portal</Description>
+    <PackageProjectUrl>https://github.com/iyegoroff/fable-import-react-native-portal</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/iyegoroff/fable-import-react-native-portal</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/iyegoroff/fable-import-react-native-portal/blob/master/LICENSE</PackageLicenseUrl>
     <PackageIconUrl></PackageIconUrl>
     <PackageTags>fsharp;fable;react-native;portal</PackageTags>
     <Authors>iyegoroff</Authors>
