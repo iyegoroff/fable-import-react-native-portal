@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Fable.React binding for Flatpickr component</Description>
+    <PackageProjectUrl>https://github.com/Zaid-Ajaj/elmish-components</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Zaid-Ajaj/elmish-components</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/Zaid-Ajaj/Fable.React.Flatpickr/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageTags>fsharp;fable;react-native;portal</PackageTags>
+    <Authors>iyegoroff</Authors>
+    <Version>0.0.1</Version>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+</PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Fable.Import.ReactNativePortal.fs" />
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>
