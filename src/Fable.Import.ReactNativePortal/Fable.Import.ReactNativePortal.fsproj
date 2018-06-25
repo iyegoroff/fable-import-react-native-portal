@@ -9,7 +9,7 @@
     <PackageTags>fsharp;fable;react-native;portal</PackageTags>
     <Authors>iyegoroff</Authors>
     <Version>0.0.1</Version>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
 </PropertyGroup>
   <ItemGroup>
