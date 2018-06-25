@@ -8,12 +8,12 @@
     <PackageIconUrl></PackageIconUrl>
     <PackageTags>fsharp;fable;react-native;portal</PackageTags>
     <Authors>iyegoroff</Authors>
-    <Version>0.0.4</Version>
+    <Version>0.0.5</Version>
     <TargetFramework>netstandard1.6</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fable.React" />
+    <PackageReference Include="Fable.React" Version="3.1.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fable.Import.ReactNativePortal.fs" />
