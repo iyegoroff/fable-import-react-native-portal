@@ -12,7 +12,7 @@ const usage = () => {
 
 const publish = async (bumpStrategy) => {
   const [packageName] = (await promisify(fs.readdir)('./src/')).filter(f => f !== '.DS_Store');
-  
+
   const fsprojPath = `./src/${packageName}/${packageName}.fsproj`;
 
   const fsproj = (await promisify(fs.readFile)(fsprojPath)).toString();
@@ -45,9 +45,9 @@ const publish = async (bumpStrategy) => {
 
 const args = process.argv;
 
-const versionIsInvalid = args[2] ?
-  !/^(patch|minor|major)$/.test(args[2]) :
-  false;
+const versionIsInvalid = args[2]
+  ? !/^(patch|minor|major)$/.test(args[2])
+  : false;
 
 if (versionIsInvalid) {
   usage();
