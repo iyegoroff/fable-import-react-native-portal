@@ -4,8 +4,6 @@ const fs = require('fs');
 const {exec} = require('child_process');
 const {promisify} = require('util');
 
-const packageName = 'Fable.Import.ReactNativePortal';
-const fsprojPath = `./src/${packageName}/${packageName}.fsproj`;
 const versionMatcher = /<Version>(\d+)\.(\d+)\.(\d+)<\/Version>/m;
 
 const usage = () => {
@@ -13,6 +11,10 @@ const usage = () => {
 };
 
 const publish = async (bumpStrategy) => {
+  const [packageName] = (await promisify(fs.readdir)('./src/')).filter(f => f !== '.DS_Store');
+  
+  const fsprojPath = `./src/${packageName}/${packageName}.fsproj`;
+
   const fsproj = (await promisify(fs.readFile)(fsprojPath)).toString();
 
   const [, major, minor, patch] = fsproj.match(versionMatcher);
@@ -27,11 +29,18 @@ const publish = async (bumpStrategy) => {
 
   await promisify(fs.writeFile)(fsprojPath, nextFsproj);
 
-  await promisify(exec)(`rm -rf ./src/${packageName}/{bin,obj}`);
-  // await promisify(exec)(`cd src/${packageName} && dotnet pack -c Release`);
-  // await promisify(exec)(`cd src/${packageName} && dotnet nuget push --source nuget.org -k \${NUGET_KEY} bin/Release/${packageName}.${nextVersion}.nupkg`);
-  await promisify(exec)(`git add -A . && git commit -am 'version ${nextVersion}' && git push && git tag 'v${nextVersion}' && git push origin --tags`);
-
+  await promisify(exec)(
+    `rm -rf ./src/${packageName}/{bin,obj} &&
+     cd src/${packageName} &&
+     dotnet pack -c Release &&
+     dotnet nuget push --source nuget.org -k \${NUGET_KEY} bin/Release/${packageName}.${nextVersion}.nupkg &&
+     git add -A . &&
+     git commit -am 'version ${nextVersion}' &&
+     git push &&
+     git tag 'v${nextVersion}' &&
+     git push origin --tags
+    `
+  );
 };
 
 const args = process.argv;
