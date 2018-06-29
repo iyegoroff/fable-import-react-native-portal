@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const {exec} = require('child_process');
-const {promisify} = require('util');
+const { exec } = require('child_process');
+const { promisify } = require('util');
 
 const versionMatcher = /<Version>(\d+)\.(\d+)\.(\d+)<\/Version>/m;
 
@@ -22,35 +22,33 @@ const publish = async (bumpStrategy) => {
   const nextVersion = bumpStrategy === 'patch'
     ? `${major}.${minor}.${+patch + 1}`
     : bumpStrategy === 'minor'
-    ? `${major}.${+minor + 1}.0`
-    : `${+major + 1}.0.0`;
+      ? `${major}.${+minor + 1}.0`
+      : `${+major + 1}.0.0`;
 
   const nextFsproj = fsproj.replace(versionMatcher, `<Version>${nextVersion}</Version>`);
 
   await promisify(fs.writeFile)(fsprojPath, nextFsproj);
 
-  await promisify(exec)(
+  const run = exec(
     `rm -rf ./src/${packageName}/{bin,obj} &&
      cd src/${packageName} &&
      dotnet pack -c Release &&
      dotnet nuget push --source nuget.org -k \${NUGET_KEY} bin/Release/${packageName}.${nextVersion}.nupkg &&
-     git add -A . &&
+     git add -u &&
      git commit -am 'version ${nextVersion}' &&
      git push &&
      git tag 'v${nextVersion}' &&
      git push origin --tags
     `
   );
+
+  run.stdout.pipe(process.stdout);
 };
 
-const args = process.argv;
+const [, , bumpStrategy] = process.argv;
 
-const versionIsInvalid = args[2]
-  ? !/^(patch|minor|major)$/.test(args[2])
-  : false;
-
-if (versionIsInvalid) {
-  usage();
+if (bumpStrategy && /^(patch|minor|major)$/.test(bumpStrategy)) {
+  publish(bumpStrategy);
 } else {
-  publish(args[2]);
+  usage();
 }
