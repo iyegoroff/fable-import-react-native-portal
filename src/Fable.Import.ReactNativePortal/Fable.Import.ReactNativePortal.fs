@@ -1,4 +1,3 @@
-[<RequireQualifiedAccess>]
 module Fable.Import.ReactNativePortal
 
 open Fable.Import.React
